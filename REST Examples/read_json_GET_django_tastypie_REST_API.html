@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>    
+ <title>Hello World, AngularJS</title>    
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.js"></script>
+<script>
+	 var myApp = angular.module('myApp', []);
+	 myApp.controller('AuthorsCtrl', ['$scope', '$http', function ($scope, $http) {
+	 $scope.authors = {};
+	  // Initiate a model as an empty string
+	  //$scope.user.username = '';
+	  
+	  // We want to make a call and get
+	  // the person's username
+	  $http({
+		method: 'GET',
+		url: 'http://127.0.0.1/api/expose/author/'
+	  })
+	  .success(function (data, status, headers, config) {
+		// See here, we are now assigning this username
+		// to our existing model!
+		$scope.authors = data.objects;
+		
+	  })
+	  .error(function (data, status, headers, config) {
+	    //alert('inside error: ' + status + ' ||||| ' + headres + ' ||||| ' + config);
+		// something went wrong :(
+	  });
+	}]);
+
+</script>
+ <style> </style>
+</head>
+
+<body> 
+<div ng-controller="AuthorsCtrl">         
+	<ul>
+	  <li ng-repeat="author in authors">
+		<p>First Name: {{ author.first_name }}</p>
+		<p>Last Name: {{ author.last_name }}</p>
+		<p>Email: {{ author.email }}</p>
+	  </li>
+	</ul>
+</div>    
+</body>
+
+</html>

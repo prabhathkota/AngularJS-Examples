@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+  <script>
+	function DeathrayMenuController($scope) {
+	        $scope.menuState = {}
+			$scope.menuState.show = false;
+			$scope.toggleMenu = function() {
+				$scope.menuState.show = !$scope.menuState.show;
+			};
+		// death ray functions left as exercise to reader
+	}
+  </script>
+</head>
+<body ng-controller='DeathrayMenuController'>
+<h1>Your Order</h1>
+<div >
+	<button ng-click='toggleMenu()'>Toggle Menu</button>
+	<ul ng-show='menuState.show'>
+		<li>Stun</li>
+		<li>Disintegrate</li>
+		<li>Erase from history</li>
+	</ul>
+<div/>
+</body>
+</html>
